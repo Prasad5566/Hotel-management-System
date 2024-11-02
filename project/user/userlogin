@@ -1,0 +1,49 @@
+<html>
+<head>
+<title> my page</title>
+</head>
+<body align="center">
+<image src="hotel.jfif" height="300" width="600"/>
+<form method="POST">
+<br>user_id</br>
+<input type="text" name="userid"/>
+<br>password</br>
+<input type="text" name="password"/>
+<br></br>
+<input type="submit" name="home"/>
+<br></br>
+<a href="newaccount.php">new account</a>
+</form>
+</body>
+</html>
+<?php
+$conn=mysqli_connect("localhost","root","","smart menu card");
+if(isset($_POST['home']))
+{
+	
+	
+	$userid=$_POST['userid'];
+	$password=$_POST['password'];
+	
+	echo $userid;
+	echo $password;
+	$query=mysqli_query($conn,"SELECT * FROM user WHERE userid='$userid' AND password='$password'");
+	
+	if(mysqli_num_rows($query) > 0)
+	{
+		echo "<script>
+			alert('Login Ok ');
+			window.location.href='homepage.php'
+			</script>
+			";
+	}
+	else
+	{
+		echo "<script>
+			alert('Login Fail ');
+			window.location.href='userlogin.php'
+			</script>
+			";
+	}
+}
+?>
